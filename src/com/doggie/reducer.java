@@ -24,11 +24,11 @@ public class reducer extends Reducer<LongWritable,Text,Text,LongWritable> {
                 String realName = val.toString().substring(4);
                 itemName = new Text(realName);
             }else{
-                LongWritable price = new LongWritable(Long.valueOf(val.toString()));
+                LongWritable price = new LongWritable(Long.valueOf(val.toString()));//如果是价格则进入队列
                 queue.add(price);
             }
         }
-        for (LongWritable val : queue) {
+        for (LongWritable val : queue) {//遍历queue(这是一个耗费内存的解法)
             context.write(itemName, val);
         }
     }
